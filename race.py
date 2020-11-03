@@ -1,4 +1,5 @@
 # Funcao que define o corpo do dicionario principal que sera extraido do arquivo de Log
+# O parametro recebido eh a String da linha presente
 def creatOBJ(line):
     racerOBJ = {
         'nome': " ".join(line.rstrip().split()[3]).replace(' ', ''),
@@ -9,28 +10,31 @@ def creatOBJ(line):
     return racerOBJ
 
 # Funcao que formata e soma o tempo de cada volta dos competidores
+# Os parametros recebidos sao tempo que ja esta no diconario e novo tempo 
 def sumTime(origTime, newTime):
     minu = int(origTime.split(':')[0]) + int(newTime.split(':')[0])
-    seg = int(origTime.split(':')[1].split('.')[0]) + int(newTime.split(':')[1].split('.')[0])
+    sec = int(origTime.split(':')[1].split('.')[0]) + int(newTime.split(':')[1].split('.')[0])
     mill = int(origTime.split(':')[1].split('.')[1]) + int(newTime.split(':')[1].split('.')[1])
     if mill >= 1000:
         mill -= 1000
-        seg += 1
-    if seg >= 60:
-        seg -= 60
+        sec += 1
+    if sec >= 60:
+        sec -= 60
         minu += 1
     millStr = str(mill) if mill > 100 else '0' + str(mill)
-    segStr = str(seg) if seg > 10 else '0' + str(seg)
+    secStr = str(sec) if sec > 10 else '0' + str(sec)
     minuStr = str(minu)
-    time = minuStr + ':' + segStr + '.' + millStr
+    time = minuStr + ':' + secStr + '.' + millStr
     return time
 
-# Funcao rfesposavel em fazero print final na tela, esta separada do corpo principal, pois em um Back end real, seria descartada
+# Funcao resposavel em fazero print final na tela, esta separada do corpo principal, pois em um Back end real, seria descartada
+# O parametro recebido eh o dicionario com todas as informacoes a serem passadas para a tena de uma forma mais amigavel
 def podium(racers):
     for racer in racers:
         print('Posicao: ' + str(racers[racer]['posicao']) + '; ID: ' + racer + '; Nome: ' + racers[racer]['nome'] + '; Qtd de voltas: ' + racers[racer]['volta'] + '; Tempo de prova: ' + racers[racer]['tempo'])
 
 # Funcao mais volatil de todas onde se concentra a logica e caminhos que o programa pode seguir
+# O parametro recebiodo eh o nome do arquivol log a ser pesquisado
 def logReader(file):
     racer = {}
     laps = [0, 0, 0, 0]
