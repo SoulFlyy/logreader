@@ -48,10 +48,7 @@ def logReader(file):
             if racerId in racer:        
                 racer[racerId]['volta'] = " ".join(line.rstrip().split()[4]).replace(' ', '')
                 racer[racerId]['tempo'] = sumTime(racer[racerId]['tempo'], " ".join(line.rstrip().split()[5]).replace(' ', ''))
-                if racer[racerId]['volta'] == '1':
-                    laps[0] += 1
-                    racer[racerId]['posicao'] = laps[0]
-                elif racer[racerId]['volta'] == '2':
+                if racer[racerId]['volta'] == '2':
                     laps[1] += 1
                     racer[racerId]['posicao'] = laps[1]
                 elif racer[racerId]['volta'] == '3':
@@ -63,7 +60,10 @@ def logReader(file):
                     break
             else:
                 racer[racerId] = creatOBJ(line)
+                laps[0] += 1
+                racer[racerId]['posicao'] = laps[0]
     f.close
+    print(racer)
     podium(racer)
 
 logReader('corrida')
