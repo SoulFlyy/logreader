@@ -8,5 +8,5 @@ Como interpretado na atividade, eu considero o fim da corrida quando o primeiro 
 
 Na branch citada anteriormente, há 2 casos, o que considera a corrida toda e o que considera apenas oq foi registrado antes da do primeiro colocado completar a quarta volta.
 
-##Por que Python??
+## Por que Python??
 Essa é uma prova de que posso sair da zona de conforto, e mesmo assim produzir algo valido e que não tenho medo de sair da zona de conforto como NodeJS ou ate mesmo Java
