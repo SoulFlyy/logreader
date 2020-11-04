@@ -4,9 +4,13 @@ class Reader:
         self.laps = [0, 0, 0, 0]
         self.first = True
 
+    # Metodo responsavel por limpar os espacos do arquivo e pegas apenas a coluna desejada
+    # Parametros são, o arquivo sendo lido e o indice da coluna
     def clearSpace(self, line, ind):
         return " ".join(line.rstrip().split()[ind]).replace(' ', '')
 
+    # Metodo responsavel por transformar a linha em um dicionario
+    # Recebe como parametro a linha sendo lida 
     def creatOBJ(self, line):
         racerOBJ = {
             'nome': self.clearSpace(line, 3),
@@ -15,7 +19,8 @@ class Reader:
             'posicao': ''
         }
         return racerOBJ
-    
+
+    # Metodo principal o qual trata de todos os rumos que a leitura pode levar, nele esta sentralizado a leitura do arquivo e as regras para estrurutar o JSON
     def logReader(self):
         f = open('corrida.log', 'r')
         first = True
@@ -44,6 +49,8 @@ class Reader:
         f.close
         return self.racer
 
+    # Metodo responsavel por somar e edivar o tempo corretamente
+    # Recebe como parametro o tempo atual e o tempo a ser somado
     def sumTime(self, origTime, newTime):
         minu = int(origTime.split(':')[0]) + int(newTime.split(':')[0])
         sec = int(origTime.split(':')[1].split('.')[0]) + int(newTime.split(':')[1].split('.')[0])
